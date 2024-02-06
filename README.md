@@ -1,0 +1,1 @@
+### Portfolio developed with [`Nextjs`](https://nextjs.org/) and [`ShadcnUI`](https://ui.shadcn.com/)
