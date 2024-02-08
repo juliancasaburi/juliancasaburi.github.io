@@ -1,0 +1,14 @@
+import MdxLayout from '../components/mdx-layout'
+
+---
+title: 'Welcome to my blog!'
+publishedAt: '2024-02-07'
+summary: 'First blog post.'
+---
+
+# 👋 Hi!  
+This blog post uses [MDX markdown](https://mdxjs.com/).
+
+export default function MDXPage({ children }) {
+  return <MdxLayout>{children}</MdxLayout>;
+}

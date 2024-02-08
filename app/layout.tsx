@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Header } from "@/components/header";
 import { siteConfig } from "@/config/site-config";
-import Head from "next/head";
 import ScrollToTop from "@/components/ui/scrollToTop";
 
 export const metadata: Metadata = {

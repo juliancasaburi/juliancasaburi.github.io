@@ -4,17 +4,22 @@ import { NavItem } from "@/types/nav";
 export const mainNav: NavItem[] = [
   {
     title: "About",
-    href: "#about",
+    href: "/#about",
     Icon: Icons.user,
   },
   {
     title: "Work",
-    href: "#work",
+    href: "/#work",
     Icon: Icons.flame,
   },
   {
     title: "Contact",
-    href: "#contact",
+    href: "/#contact",
+    Icon: Icons.send,
+  },
+  {
+    title: "Blog",
+    href: "/blog",
     Icon: Icons.send,
   },
 ];
