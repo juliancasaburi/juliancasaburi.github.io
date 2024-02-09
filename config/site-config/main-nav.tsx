@@ -20,6 +20,6 @@ export const mainNav: NavItem[] = [
   {
     title: "Blog",
     href: "/blog",
-    Icon: Icons.send,
+    Icon: Icons.notebookText,
   },
 ];

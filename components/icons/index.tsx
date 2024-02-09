@@ -13,6 +13,7 @@ import {
   GithubIcon,
   ArrowUpRightIcon,
   TwitterIcon,
+  LucideBookOpen,
 } from "lucide-react";
 import { ComponentProps } from "react";
 
@@ -30,6 +31,7 @@ export const Icons = {
   facebookOutline: FacebookIcon,
   twitterOutline: TwitterIcon,
   arrowUpRight: ArrowUpRightIcon,
+  notebookText: LucideBookOpen,
   gitHub: (props: LucideProps) => (
     <svg viewBox="0 0 438.549 438.549" {...props}>
       <path
