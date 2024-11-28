@@ -39,9 +39,9 @@ export const projects: Project[] = [
   {
     image: "/images/projects/dollar-calc.png",
     title: "Dollar",
-    desc: "Currency converter app: 'Official Dollar' to 'ARS (Pesos Argentinos)' & historic prices.",
+    desc: "'Official Dollar' to 'ARS (Pesos Argentinos)' historic prices & 'Dólar Tarjeta' calculator",
     repo: "https://github.com/juliancasaburi/dollar",
-    preview: null,
+    preview: "https://juliancasaburi.github.io/dollar/",
     tags: [
       { name: "Javascript"},
       { name: "React"},
