@@ -3,7 +3,7 @@ import { Icons } from "@/components/icons";
 export const links = {
   github: "https://github.com/juliancasaburi",
   mail: "mailto:juliancasaburi@gmail.com",
-  twitter: "https://twitter.com/juliancasaburi",
+  x: "https://x.com/juliancasaburi",
 };
 
 export const socialLinks = [
@@ -18,8 +18,8 @@ export const socialLinks = [
     href: links.github,
   },
   {
-    name: "Twitter",
-    icon: Icons.twitterOutline,
-    href: links.twitter,
+    name: "X",
+    icon: Icons.XIcon,
+    href: links.x,
   },
 ];
