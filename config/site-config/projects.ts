@@ -37,6 +37,16 @@ export const projects: Project[] = [
     ],
   },
   {
+    image: "/images/projects/openmu.png",
+    title: "OpenMU",
+    desc: "Contributed to feature development and code style improvements for OpenMU, an easy-to-use, extendable, and customizable server for the MMORPG 'MU Online'.",
+    repo: "https://github.com/MUnique/OpenMU",
+    preview: "https://github.com/MUnique/OpenMU",
+    tags: [
+      { name: "GameServer"},
+    ],
+  },
+  {
     image: "/images/projects/dollar-calc.png",
     title: "Dollar",
     desc: "'Official Dollar' to 'ARS (Pesos Argentinos)' historic prices & 'Dólar Tarjeta' calculator",
