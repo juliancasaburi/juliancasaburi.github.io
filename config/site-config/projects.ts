@@ -41,7 +41,7 @@ export const projects: Project[] = [
     title: "Business Process Model and Notation",
     desc: "Business Process Model created using Bizagi Modeler.",
     repo: "https://github.com/juliancasaburi/sistemas-y-organizaciones-bpm",
-    preview: "https://github.com/juliancasaburi/sistemas-y-organizaciones-bpm",
+    preview: "https://raw.githubusercontent.com/juliancasaburi/sistemas-y-organizaciones-bpm/refs/heads/main/bizagi-bpm.png",
     tags: [
       { name: "Business Process Model"},
       { name: "BPMN"},
