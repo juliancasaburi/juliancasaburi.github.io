@@ -37,6 +37,19 @@ export const projects: Project[] = [
     ],
   },
   {
+    image: "/images/projects/bizagi-bpm.png",
+    title: "Business Process Model and Notation",
+    desc: "Business Process Model created using Bizagi Modeler.",
+    repo: "https://github.com/juliancasaburi/sistemas-y-organizaciones-bpm",
+    preview: "https://github.com/juliancasaburi/sistemas-y-organizaciones-bpm",
+    tags: [
+      { name: "Business Process Model"},
+      { name: "BPMN"},
+      { name: "Process-oriented organization"},
+      { name: "Bizagi Modeler"},
+    ],
+  },
+  {
     image: "/images/projects/openmu.png",
     title: "OpenMU",
     desc: "Contributed to feature development and code style improvements for OpenMU, an easy-to-use, extendable, and customizable server for the MMORPG 'MU Online'.",
