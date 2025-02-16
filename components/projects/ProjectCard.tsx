@@ -37,17 +37,6 @@ export default function ProjectCard({
             >
               {title}
             </Link>
-            <div className="-mx-2 mt-2 flex flex-wrap">
-              {tags.map((tag, index) => (
-                <Badge
-                  key={index}
-                  className="mx-1 my-1"
-                  variant="secondary"
-                >
-                  {tag.name}
-                </Badge>
-              ))}
-            </div>
           </div>
 
           <div className="flex">
@@ -76,6 +65,18 @@ export default function ProjectCard({
         </div>
 
         <p className="mt-[2px] text-base">{desc}</p>
+        
+        <div className="-mx-2 mt-2 flex flex-wrap">
+              {tags.map((tag, index) => (
+                <Badge
+                  key={index}
+                  className="mx-1 my-1"
+                  variant="secondary"
+                >
+                  {tag.name}
+                </Badge>
+              ))}
+            </div>
       </div>
     </div>
   );
