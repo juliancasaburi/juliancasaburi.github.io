@@ -8,7 +8,7 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "Julián Casaburi",
-  title: "Julián Casaburi - Sofware developer",
+  title: "Julián Casaburi - Software developer",
   gitHubUser: "juliancasaburi",
   url: envConfig.BASE_URL,
   description:
