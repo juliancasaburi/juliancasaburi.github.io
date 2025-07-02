@@ -10,17 +10,7 @@ export default function About() {
       <div className="group">
         <h1 className="title-bottom-line">About me</h1>
         <p>
-          {`I'm a Computer Science Student 📚 (99%) @`}
-          <Link
-            href="https://www.info.unlp.edu.ar/"
-            target="_blank"
-            className="ml-1 mr-1 text-primary underline-offset-4 hover:underline"
-          >
-            Facultad de Informática - UNLP (Universidad Nacional de La Plata)
-          </Link>
-          and a proud graduate 🎓 with a degree in Analista Programador
-          Universitario. Currently, the only milestone left in my academic
-          journey is the completion of my thesis.
+          {`I'm a Computer Science Graduate 🎓`}
           </p>
           <p className="mt-6">My academic pursuits have
           honed my passion for backend topics, system architecture, and
