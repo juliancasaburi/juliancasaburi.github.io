@@ -1,6 +1,6 @@
 
 ---
-title: "How My Thesis Director Introduced Me to Academic Publishing"
+title: "From a 145-Page Thesis to a 15-Page Paper: My Crash Course in Academic Publishing"
 publishDate: "2025-07-15"
 description: "A personal reflection on learning the process of publishing papers to conferences and journals."
 tags:
@@ -16,9 +16,14 @@ During my graduate studies, one of the most impactful experiences was learning a
 
 He explained how to select appropriate conferences and journals, emphasizing the importance of matching the scope and audience. Together, we worked on my first paper, revising drafts and responding to reviewer comments. His mentorship demystified the process and gave me the confidence to pursue future publications.
 
-![Published Paper](/src/assets/projects/paper.png)
-<figcaption style="text-align:center;font-size:0.95em;">The graphical abstract for the condensed 15-page paper</figcaption>
-
 ## Struggles: Condensing My Thesis
 
 One of the biggest challenges I faced was condensing my 145-page thesis into a full paper with a strict 15-page limit. This process was daunting, as I had to carefully select the most important results and arguments, while ensuring clarity and coherence.
+
+## Peer Review
+The peer review process took a few weeks. I received anonymous feedback from 2 reviewers. It ranged from technical questions to concerns about clarity. My director guided me in preparing a response letter for the revised version — a detailed document where we addressed each reviewer’s comment one by one. We then submitted both the revised manuscript and the response letter for final evaluation.  
+Once accepted, we submitted the final camera-ready version and registered for the conference.
+
+## Final Thoughts
+If you're a student staring up at the same intimidating mountain, my advice is simple: you don't have to climb it alone.
+Find a mentor who can show you the ropes. Trust the process, even when it feels grueling. See every revision and every piece of feedback not as a failure, but as a step toward improvement.
