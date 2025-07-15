@@ -1,6 +1,6 @@
 
 ---
-title: "From a 145-Page Thesis to a 15-Page Paper: My Crash Course in Academic Publishing"
+title: "145 to 15 Pages: Turning a Thesis into a Paper"
 publishDate: "2025-07-15"
 description: "A personal reflection on learning the process of publishing papers to conferences and journals."
 tags:
