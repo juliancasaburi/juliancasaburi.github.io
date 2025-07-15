@@ -12,6 +12,7 @@ export const socialLinks = [
   'bluesky',
   'tiktok',
   'weibo',
+  'linkedin',
   'steam',
   'bilibili',
   'zhihu',

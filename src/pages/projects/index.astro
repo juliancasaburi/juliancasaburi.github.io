@@ -1,174 +1,214 @@
 ---
 import { Image } from 'astro:assets'
 
-import { Button, Collapse, Icon } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
-import ProjectSection from '@/components/projects/ProjectSection.astro'
-import Sponsors from '@/components/projects/Sponsors.astro'
-import Sponsorship from '@/components/projects/Sponsorship.astro'
-import alipay from '@/assets/alipay-qrcode.jpg'
-import KeyIcon from '@/assets/icons/key.svg'
-import wechat from '@/assets/wechat-qrcode.jpg'
+import ProjectCard from '@/components/home/ProjectCard.astro'
+import GitHubRepoCard from '@/components/home/GitHubRepoCard.astro'
 import config from '@/site-config'
 
 const headings = [
-  { depth: 2, slug: 'theme', text: 'Theme' },
-  { depth: 2, slug: 'programs', text: 'Programs' },
-  { depth: 2, slug: 'learnings', text: 'Learnings' },
+  { depth: 2, slug: 'browser-extensions', text: 'Browser Extensions' },
+  { depth: 2, slug: 'ctf-security', text: 'CTF & Security' },
+  { depth: 2, slug: 'academic', text: 'Academic / Research' },
+  { depth: 2, slug: 'backend', text: 'Backend' },
+  { depth: 2, slug: 'web-applications', text: 'Web Applications' },
   { depth: 2, slug: 'others', text: 'Others' },
-  { depth: 2, slug: 'gpg-signature', text: 'GPG Signature' },
-  { depth: 2, slug: 'sponsorship', text: 'Sponsorship' }
+  { depth: 2, slug: 'github-repositories', text: 'GitHub Repositories' }
 ]
+
+// Fetch GitHub repositories server-side
+interface GitHubRepo {
+  name: string
+  description: string | null
+  html_url: string
+  stargazers_count: number
+  forks_count: number
+  language: string | null
+  updated_at: string
+  topics: string[]
+}
+
+const fetchGitHubRepos = async (): Promise<GitHubRepo[]> => {
+  try {
+    const username = 'juliancasaburi'
+    let allRepos: GitHubRepo[] = []
+    let page = 1
+    let hasMore = true
+
+    while (hasMore) {
+      const response = await fetch(
+        `https://api.github.com/users/${username}/repos?page=${page}&per_page=100&sort=updated`,
+        {
+          headers: {
+            'User-Agent': 'astro-theme-pure'
+          }
+        }
+      )
+      
+      if (!response.ok) {
+        throw new Error(`Failed to fetch repositories: ${response.status}`)
+      }
+
+      const repos: GitHubRepo[] = await response.json()
+      
+      if (repos.length === 0) {
+        hasMore = false
+      } else {
+        allRepos = [...allRepos, ...repos]
+        page++
+      }
+    }
+
+    // Sort by stars (descending) and return top repositories
+    return allRepos.sort((a, b) => b.stargazers_count - a.stargazers_count)
+  } catch (error) {
+    console.error('Error fetching GitHub repositories:', error)
+    return []
+  }
+}
+
+const githubRepos = await fetchGitHubRepos()
+const reposPerPage = 4
 ---
 
 <PageLayout title='Projects' {headings} info={{ slug: '/projects', hideComment: true }}>
-  <p>Github Activities:</p>
+  <p>Github Activity:</p>
   <p>
     <Image
-      src='https://ghchart.rshah.org/659eb9/cworld1'
-      alt='github activities'
+      src='https://ghchart.rshah.org/659eb9/juliancasaburi'
+      alt='github activity'
       inferSize
       loading='lazy'
     />
   </p>
   <p>
-    If you think it would be useful or interesting to collaborate on a project, you can donate to
-    support my work or contact me to discuss a project.
+    Feel free to explore my repositories and reach out if you’d like to connect, collaborate, or
+    simply have a chat about anything tech-related!
   </p>
-  <Button title='Checkout sponsorship' class='w-fit' href='#sponsorship'>
-    <Icon class='size-5' name='receive-money' slot='before' />
-  </Button>
 
-  <h2 id='theme'>Theme</h2>
-  <ProjectSection
-    projects={[
-      {
-        name: '🍭 Astro-theme-pure',
-        description: 'A simple, clean but powerful blog theme build by astro.',
-        links: [
-          { type: 'github', href: 'https://github.com/cworld1/astro-theme-pure' },
-          { type: 'site', href: 'https://github.com/cworld1/astro-theme-pure' },
-          {
-            type: 'doc',
-            href: 'https://github.com/cworld1/astro-theme-pure/blob/main/src/content/blog/customize/index.md'
-          }
-        ]
-      }
-    ]}
-  />
-
-  <h2 id='programs'>Programs</h2>
-  <ProjectSection
-    projects={[
-      {
-        name: '📒 Notie',
-        description:
-          'Android note App complies with Material You specifications, developed using Java',
-        links: [
-          { type: 'github', href: 'https://github.com/cworld1/notie' },
-          {
-            type: 'release',
-            href: 'https://github.com/cworld1/notie/releases'
-          }
-        ]
-      },
-      {
-        name: '💄 PKU Art',
-        description: 'A script to beautify pku course website',
-        links: [
-          { type: 'github', href: 'https://github.com/zhuozhiyongde/pku-art' },
-          { type: 'site', href: 'https://github.com/zhuozhiyongde/pku-art' },
-          { type: 'doc', href: 'https://docs.arthals.ink/docs/pku-art' }
-        ]
-      }
-    ]}
-  />
-  <Collapse title='Some old projects'>
-    <ProjectSection
-      projects={[
-        {
-          name: 'Search Switcher',
-          description: 'Add links to each other in search engines',
-          links: [{ type: 'github', href: 'https://github.com/cworld1/search-switcher' }]
-        },
-        {
-          name: 'Pure Baidu',
-          description: 'Baidu search page beautification module',
-          links: [
-            { type: 'doc', href: 'https://cworld0.com/blog/pure-baidu' },
-            { type: 'site', href: 'https://userstyles.org/styles/173673/pure' }
-          ]
-        }
-      ]}
+  <h2 id='browser-extensions'>Browser Extensions</h2>
+  <div class='grid grid-cols-1 gap-6 sm:grid-cols-2 mb-8 px-2'>
+    <ProjectCard
+      href='https://github.com/juliancasaburi/siu-guarani-promedio-extension'
+      heading='SIU-Guaraní promedio'
+      subheading="Extension for Chromium and Firefox-based browsers that restores discontinued features of my university's student portal using client-side enhancements."
+      imagePath='/src/assets/projects/siu-guarani-extension.gif'
     />
-  </Collapse>
+  </div>
 
-  <h2 id='learnings'>Learnings</h2>
-  <ProjectSection
-    class='my-2'
-    projects={[
-      {
-        name: 'Rust Learning',
-        description: 'Some notes and code about CWorld learning Rust',
-        links: [{ type: 'github', href: 'https://github.com/cworld1/rust-learning' }]
-      },
-      {
-        name: 'CS 213 Learning',
-        description: 'Notes, code and experiences for Introduction to Computer Systems course',
-        links: [
-          {
-            type: 'github',
-            href: 'https://github.com/zhuozhiyongde/Introduction-To-Computer-System-2023Fall-PKU'
-          }
-        ]
-      }
-    ]}
-  />
+  <h2 id='ctf-security'>CTF & Security</h2>
+  <div class='grid grid-cols-1 gap-6 sm:grid-cols-2 mb-8 px-2'>
+    <ProjectCard
+      href='https://github.com/juliancasaburi/irisctf-2024'
+      heading='IRIS CTF 2024'
+      subheading="Writeups & automated solve scripts for IrisSec's Capture The Flag competition."
+      imagePath='/src/assets/projects/irisctf-2024.png'
+    />
+    <ProjectCard
+      href='https://github.com/juliancasaburi/pointeroverflowctf-2023'
+      heading='Pointer Overflow CTF 2023'
+      subheading='Writeups & automated solve scripts for POCTF 2023, organized by University of Wisconsin - Stevens Point.'
+      imagePath='/src/assets/projects/poctf-2023.png'
+    />
+  </div>
+
+  <h2 id='academic'>Academic / Research</h2>
+  <div class='grid grid-cols-1 gap-6 sm:grid-cols-2 mb-8 px-2'>
+    <ProjectCard
+      href='https://github.com/juliancasaburi/tesis-grado-lic-sistemas-unlp'
+      heading='University Thesis'
+      subheading='Migration from "Lambda" to "Monolith": rationale, patterns, and performance analysis'
+      imagePath='/src/assets/projects/thesis.png'
+    />
+    <ProjectCard
+      href='https://icwe2025.webengineering.org/conference-program/'
+      heading='Accepted Paper - International Conference on Web Engineering 2025'
+      subheading='Assessing the Migration from FaaS to IaaS: Cost, Performance, and Challenges in AWS'
+      imagePath='/src/assets/projects/paper.png'
+    />
+  </div>
+
+  <h2 id='backend'>Backend</h2>
+  <div class='grid grid-cols-1 gap-6 sm:grid-cols-2 mb-8 px-2'>
+    <ProjectCard
+      href='https://github.com/juliancasaburi/bd2-promocion'
+      heading='US Traffic Accidents Queries (PostgreSQL & MongoDB)'
+      subheading='Spring - PostgreSQL - MongoDB - Docker Compose - US Traffic Accidents Dataset'
+      imagePath='/src/assets/projects/us-accidents.png'
+    />
+    <ProjectCard
+      href='https://github.com/MUnique/OpenMU'
+      heading='OpenMU'
+      subheading='Contributed to feature development and code style improvements to a server implementation for the MMORPG "MU Online".'
+      imagePath='/src/assets/projects/openmu.png'
+    />
+  </div>
+
+  <h2 id='web-applications'>Web Applications</h2>
+  <div class='grid grid-cols-1 gap-6 sm:grid-cols-2 mb-8 px-2'>
+    <ProjectCard
+      href='https://github.com/juliancasaburi/dollar'
+      heading='Dollar'
+      subheading="Currency converter app: 'Official Dollar' to 'ARS (Pesos Argentinos)' & historic prices."
+      imagePath='/src/assets/projects/dollar-calc.png'
+    />
+  </div>
 
   <h2 id='others'>Others</h2>
-  <ProjectSection
-    projects={[
-      {
-        name: 'CWorld',
-        description: "CWorld's Github",
-        links: [{ type: 'github', href: 'https://github.com/cworld1' }]
-      },
-      {
-        name: 'Arthals',
-        description: 'Arthals Github',
-        links: [{ type: 'github', href: 'https://github.com/zhuozhiyongde' }]
-      }
-    ]}
-  />
+  <div class='grid grid-cols-1 gap-6 sm:grid-cols-2 mb-8 px-2'>
+    <ProjectCard
+      href='https://github.com/juliancasaburi/sistemas-y-organizaciones-bpm'
+      heading='Business Process Model and Notation'
+      subheading='Business Process Model created using Bizagi Modeler'
+      imagePath='/src/assets/projects/bizagi-bpm.png'
+    />
+  </div>
 
-  <!-- gpg signature -->
-  <h2 id='gpg-signature'>GPG Signature</h2>
-  <p>
-    You can verify the authenticity of the files I signed by checking the GPG signature. My GPG key
-    is <code>114514</code>, and you can find it on the opengpg key servers or download from it.
+  <h2 id='github-repositories'>GitHub Repositories</h2>
+  <p class='text-muted-foreground mb-4'>
+    Explore my GitHub repositories sorted by popularity.
   </p>
-  <Button href='https://keys.openpgp.org/search?q=114514' title='Checkout my key' target='_blank'>
-    <KeyIcon class='size-5' slot='before' />
-  </Button>
 
-  <!-- sponsorship -->
-  <h2 id='sponsorship'>Sponsorship</h2>
-  <p>Please leave a message or contact me proactively after sponsorship.</p>
-  <Sponsorship
-    methods={[
-      { name: 'WeChat', icon: 'wechat-pay', image: wechat },
-      { name: 'Alipay', icon: 'alipay', image: alipay }
-    ]}
-  />
-  <p>Thanks to the following sponsors:</p>
-  <Sponsors
-    sponsors={[
-      { name: 'C*a（酷安@暴走の蜗牛）', amount: '2.00', date: '2019-07-02' },
-      { name: '华雄(QQ：1300****71)', amount: '5.00', date: '2019-12-30' },
-      { name: '◌(QQ：1934****45)', amount: '3.00', date: '2019-12-30' },
-      { name: 'Anonymous', amount: '20.00', date: '2022-04-06' }
-    ]}
-  />
+  <!-- Repositories container -->
+  <div id='github-repos-container' class='grid grid-cols-1 gap-6 sm:grid-cols-2 mb-6 px-2'>
+    {githubRepos.map((repo, index) => (
+      <div 
+        class={`repo-card ${index >= reposPerPage ? 'hidden' : ''}`} 
+        data-repo-index={index}
+      >
+        <GitHubRepoCard repo={repo} />
+      </div>
+    ))}
+  </div>
+
+  <!-- Pagination -->
+  {githubRepos.length > reposPerPage && (
+    <div id='github-repos-pagination' class='flex items-center justify-center mb-8'>
+      <div class="flex items-center justify-between w-full">
+        <div class="flex items-center gap-2">
+          <button 
+            id="prev-page" 
+            disabled
+            class="px-4 py-2 text-sm font-medium text-muted-foreground bg-background border border-border rounded-lg hover:bg-muted hover:text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            Previous
+          </button>
+          <span id="page-info" class="text-sm text-muted-foreground">
+            Page 1 of {Math.ceil(githubRepos.length / reposPerPage)}
+          </span>
+          <button 
+            id="next-page" 
+            class="px-4 py-2 text-sm font-medium text-muted-foreground bg-background border border-border rounded-lg hover:bg-muted hover:text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            Next
+          </button>
+        </div>
+        <div id="repos-count" class="text-sm text-muted-foreground">
+          Showing 1-{Math.min(reposPerPage, githubRepos.length)} of {githubRepos.length} repositories
+        </div>
+      </div>
+    </div>
+  )}
 </PageLayout>
 
 <script
@@ -188,7 +228,143 @@ const headings = [
   await loadPageviewCount()
 </script>
 
+<!-- GitHub Repositories Script -->
+<script define:vars={{ totalRepos: githubRepos.length, reposPerPage }}>
+  let currentPage = 1
+  const totalPages = Math.ceil(totalRepos / reposPerPage)
+  
+  function updatePagination() {
+    const prevButton = document.getElementById('prev-page')
+    const nextButton = document.getElementById('next-page')
+    const pageInfo = document.getElementById('page-info')
+    const reposCount = document.getElementById('repos-count')
+    
+    if (prevButton) {
+      prevButton.disabled = currentPage === 1
+    }
+    
+    if (nextButton) {
+      nextButton.disabled = currentPage === totalPages
+    }
+    
+    if (pageInfo) {
+      pageInfo.textContent = `Page ${currentPage} of ${totalPages}`
+    }
+    
+    if (reposCount) {
+      const start = (currentPage - 1) * reposPerPage + 1
+      const end = Math.min(currentPage * reposPerPage, totalRepos)
+      reposCount.textContent = `Showing ${start}-${end} of ${totalRepos} repositories`
+    }
+  }
+  
+  function showCurrentPageRepos() {
+    const allRepoCards = document.querySelectorAll('.repo-card')
+    const startIndex = (currentPage - 1) * reposPerPage
+    const endIndex = startIndex + reposPerPage
+    
+    allRepoCards.forEach((card, index) => {
+      if (index >= startIndex && index < endIndex) {
+        card.classList.remove('hidden')
+      } else {
+        card.classList.add('hidden')
+      }
+    })
+    
+    updatePagination()
+  }
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const prevButton = document.getElementById('prev-page')
+    const nextButton = document.getElementById('next-page')
+    
+    if (prevButton) {
+      prevButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--
+          showCurrentPageRepos()
+        }
+      })
+    }
+    
+    if (nextButton) {
+      nextButton.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          currentPage++
+          showCurrentPageRepos()
+        }
+      })
+    }
+    
+    // Initialize pagination state
+    updatePagination()
+  })
+</script>
+
 <style>
+  /* Remove underlines from project cards and improve modern look */
+  .project-card {
+    text-decoration: none !important;
+  }
+
+  .project-card h2,
+  .project-card p {
+    text-decoration: none !important;
+  }
+
+  .project-card:hover h2 {
+    text-decoration: none !important;
+  }
+
+  .project-card:visited,
+  .project-card:visited h2,
+  .project-card:visited p {
+    text-decoration: none !important;
+  }
+
+  /* GitHub repo cards styling */
+  .github-repo-card {
+    text-decoration: none !important;
+  }
+
+  .github-repo-card *,
+  .github-repo-card h3,
+  .github-repo-card p,
+  .github-repo-card span,
+  .github-repo-card div {
+    text-decoration: none !important;
+  }
+
+  .github-repo-card:hover,
+  .github-repo-card:hover *,
+  .github-repo-card:hover h3,
+  .github-repo-card:hover p,
+  .github-repo-card:hover span {
+    text-decoration: none !important;
+  }
+
+  .github-repo-card:visited,
+  .github-repo-card:visited *,
+  .github-repo-card:visited h3,
+  .github-repo-card:visited p,
+  .github-repo-card:visited span {
+    text-decoration: none !important;
+  }
+
+  .github-repo-card:focus,
+  .github-repo-card:focus *,
+  .github-repo-card:active,
+  .github-repo-card:active * {
+    text-decoration: none !important;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   .sponsorship-card {
     & .sponsorship-card-img {
       opacity: 0.3;

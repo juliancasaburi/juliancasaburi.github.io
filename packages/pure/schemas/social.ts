@@ -17,6 +17,7 @@ export const SocialLinksSchema = () =>
         if (!url) continue
         const label = {
           github: 'GitHub',
+          linkedin: 'LinkedIn',
           gitlab: 'GitLab',
           discord: 'Discord',
           youtube: 'YouTube',

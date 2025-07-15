@@ -1,0 +1,14 @@
+<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="6" fill="#2496ED"/>
+  <g>
+    <rect x="7" y="17" width="3" height="4" rx="1" fill="#fff"/>
+    <rect x="11" y="17" width="3" height="4" rx="1" fill="#fff"/>
+    <rect x="15" y="17" width="3" height="4" rx="1" fill="#fff"/>
+    <rect x="19" y="17" width="3" height="4" rx="1" fill="#fff"/>
+    <rect x="11" y="13" width="3" height="4" rx="1" fill="#fff"/>
+    <rect x="15" y="13" width="3" height="4" rx="1" fill="#fff"/>
+    <rect x="19" y="13" width="3" height="4" rx="1" fill="#fff"/>
+    <path d="M7 21c0 2.5 3 4 9 4s9-1.5 9-4" stroke="#fff" stroke-width="2" fill="none"/>
+    <ellipse cx="24" cy="20" rx="2" ry="1" fill="#fff"/>
+  </g>
+</svg>

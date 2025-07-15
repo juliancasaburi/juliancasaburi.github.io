@@ -25,8 +25,7 @@ import config from './src/site.config.ts'
 // https://astro.build/config
 export default defineConfig({
   // Top-Level Options
-  site: 'https://cworld1.github.io',
-  base: '/astro-theme-pure',
+  site: 'https://juliancasaburi.github.io',
   trailingSlash: 'never',
 
   // Adapter
