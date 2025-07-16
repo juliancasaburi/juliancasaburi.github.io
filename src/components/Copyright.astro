@@ -1,0 +1,242 @@
+---
+import type { CollectionEntry } from 'astro:content'
+
+import { Icon } from 'astro-pure/user'
+import { cn } from 'astro-pure/utils'
+import { theme } from '@/site-config'
+
+interface Props {
+  data: CollectionEntry<'blog'>['data']
+  class?: string
+}
+
+const {
+  data: { heroImage, title, publishDate },
+  class: className
+} = Astro.props
+
+const image = typeof heroImage?.src === 'string' ? heroImage?.src : (heroImage?.src?.src ?? '')
+
+// Format date manually to avoid virtual:config issue
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+}
+
+const shares = {
+  x: {
+    link: `https://x.com/intent/tweet?text='${title}'&url='${Astro.url}'&via='${theme.author}'`
+  },
+  bluesky: {
+    link: `https://bsky.app/intent/compose?text=${title}%0A${Astro.url}`
+  }
+} as const
+---
+
+<div
+  class={cn(
+    'relative flex flex-col gap-y-2 rounded-xl border px-3 sm:px-4 py-2 sm:py-3',
+    className
+  )}
+>
+  <Icon class='absolute end-4 top-4 size-20 opacity-10' name='copyright' />
+
+  {/* title & link */}
+  <div class='flex flex-col'>
+    <div class='font-medium text-foreground'>{title}</div>
+    <div class='text-sm'>{Astro.url}</div>
+  </div>
+
+  {/* common info */}
+  <div class='flex flex-row flex-wrap justify-start gap-x-5 gap-y-1 sm:gap-x-8'>
+    <div class='flex gap-x-2 sm:flex-col'>
+      <span>Author</span>
+      <span class='text-sm text-foreground max-sm:place-self-center'>{theme.author}</span>
+    </div>
+    {
+      publishDate && (
+        <div class='flex gap-x-2 sm:min-w-16 sm:flex-col'>
+          <span>Published at</span>
+          <span class='text-sm text-foreground max-sm:place-self-center'>
+            {formatDate(publishDate)}
+          </span>
+        </div>
+      )
+    }
+    <div class='flex gap-x-2 sm:flex-col'>
+      <span>Copyright</span>
+      <a
+        class='text-sm text-foreground max-sm:place-self-center'
+        href='https://creativecommons.org/licenses/by/4.0/'
+        target='_blank'
+      >
+        CC BY-NC-SA 4.0
+      </a>
+    </div>
+  </div>
+
+  {/* functions */}
+  <div class='relative'>
+    <div class='flex flex-row gap-3'>
+      <button
+        id='copy-link'
+        type='button'
+        onclick='copyLink()'
+        class='group rounded-full bg-muted p-1 text-muted-foreground transition-colors hover:text-primary sm:p-1.5'
+      >
+        <Icon class='size-5' name='link' />
+      </button>
+      <button
+        id='get-qrcode'
+        type='button'
+        onclick='toggleQRCode()'
+        style='cursor: pointer; z-index: 1000; position: relative;'
+        class='group rounded-full bg-muted p-1 text-muted-foreground transition-colors hover:text-primary sm:p-1.5'
+      >
+        <Icon class='size-5' name='qrcode' />
+      </button>
+      <a
+        href={shares.x.link}
+        target='_blank'
+        id='share-x'
+        class='group rounded-full bg-muted p-1 text-muted-foreground transition-colors hover:text-primary sm:p-1.5'
+      >
+        <Icon class='size-5' name='x' />
+      </a>
+      <a
+        href={shares.bluesky.link}
+        target='_blank'
+        id='share-bluesky'
+        class='group rounded-full bg-muted p-1 text-muted-foreground transition-colors hover:text-primary sm:p-1.5'
+      >
+        <Icon class='size-5' name='bluesky' />
+      </a>
+    </div>
+    <div
+      id='qr-container'
+      aria-expanded='false'
+      class='absolute z-10 -mt-2 box-content overflow-hidden rounded-xl border bg-muted p-4 transition-all duration-300 ease-in-out'
+      style='max-height: 0; opacity: 0; max-width: 176px;'
+    >
+      <div id='qrcode-display' class='flex justify-center'>
+        <!-- QR code will be inserted here -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #qr-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 160px;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  
+  #qr-container img {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+
+<script is:inline>
+// QR Code functionality
+let qrCodeGenerated = false
+
+function toggleQRCode() {
+  const qrContainer = document.getElementById('qr-container')
+  const qrDisplay = document.getElementById('qrcode-display')
+  const qrButton = document.getElementById('get-qrcode')
+  
+  if (!qrContainer || !qrDisplay || !qrButton) {
+    return
+  }
+  
+  const isExpanded = qrContainer.getAttribute('aria-expanded') === 'true'
+  
+  if (isExpanded) {
+    qrContainer.setAttribute('aria-expanded', 'false')
+    qrContainer.style.maxHeight = '0'
+    qrContainer.style.opacity = '0'
+    qrContainer.style.transform = 'translateY(0)'
+  } else {
+    // Calculate if there's enough space below the button
+    const buttonRect = qrButton.getBoundingClientRect()
+    const viewportHeight = window.innerHeight
+    const qrContainerHeight = 200 // Expected height of QR container
+    const spaceBelow = viewportHeight - buttonRect.bottom
+    const spaceAbove = buttonRect.top
+    
+    // Position above if there's not enough space below
+    const shouldPositionAbove = spaceBelow < qrContainerHeight && spaceAbove > qrContainerHeight
+    
+    qrContainer.setAttribute('aria-expanded', 'true')
+    qrContainer.style.maxHeight = '200px'
+    qrContainer.style.opacity = '1'
+    
+    if (shouldPositionAbove) {
+      // Position above the button
+      qrContainer.style.bottom = '100%'
+      qrContainer.style.top = 'auto'
+      qrContainer.style.marginTop = '0'
+      qrContainer.style.marginBottom = '8px'
+      qrContainer.style.transform = 'translateY(-4px)'
+    } else {
+      // Position below the button (default)
+      qrContainer.style.top = '100%'
+      qrContainer.style.bottom = 'auto'
+      qrContainer.style.marginTop = '8px'
+      qrContainer.style.marginBottom = '0'
+      qrContainer.style.transform = 'translateY(4px)'
+    }
+    
+    // Generate QR code only once using API service
+    if (!qrCodeGenerated) {
+      const currentUrl = window.location.href
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=128x128&data=${encodeURIComponent(currentUrl)}`
+      
+      const img = document.createElement('img')
+      img.src = qrUrl
+      img.alt = 'QR Code for ' + currentUrl
+      img.className = 'rounded border'
+      img.style.width = '128px'
+      img.style.height = '128px'
+      img.style.display = 'block'
+      
+      qrDisplay.innerHTML = '' // Clear any existing content
+      qrDisplay.appendChild(img)
+      qrCodeGenerated = true
+      
+      // Force container to be visible
+      setTimeout(() => {
+        qrContainer.style.maxHeight = '200px'
+        qrContainer.style.opacity = '1'
+      }, 100)
+    }
+  }
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href)
+  
+  // Simple toast notification
+  const event = new CustomEvent('toast', {
+    detail: { message: 'Link copied!' }
+  })
+  document.dispatchEvent(event)
+}
+
+// Make functions globally available
+window.toggleQRCode = toggleQRCode
+window.copyLink = copyLink
+</script>
