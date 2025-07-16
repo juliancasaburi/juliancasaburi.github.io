@@ -58,16 +58,16 @@ const getLanguageColor = (language: string | null) => {
   rel="noopener noreferrer"
   class={cn(
     className,
-    'github-repo-card group block p-6 rounded-2xl border bg-card hover:bg-card/80 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer'
+    'github-repo-card group flex flex-col p-6 rounded-2xl border bg-card hover:bg-card/80 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer h-[280px]'
   )}
 >
   <div class="flex items-start justify-between mb-3">
-    <div class="flex items-center gap-2">
-      <h3 class="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-200">
+    <div class="flex items-center gap-2 flex-1 min-w-0">
+      <h3 class="font-bold text-lg text-foreground group-hover:text-primary transition-colors duration-200 truncate">
         {repo.name}
       </h3>
     </div>
-    <div class="flex items-center gap-3 text-sm text-muted-foreground">
+    <div class="flex items-center gap-3 text-sm text-muted-foreground flex-shrink-0">
       <div class="flex items-center gap-1">
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
@@ -87,11 +87,28 @@ const getLanguageColor = (language: string | null) => {
     </div>
   </div>
 
-  <p class="text-muted-foreground text-sm mb-4 line-clamp-2 leading-relaxed">
-    {repo.description || 'No description available'}
-  </p>
+  <div class="flex-1 flex flex-col">
+    <p class="text-muted-foreground text-sm mb-4 line-clamp-3 leading-relaxed flex-1">
+      {repo.description || 'No description available'}
+    </p>
 
-  <div class="flex items-center justify-between text-xs text-muted-foreground">
+    {repo.topics && repo.topics.length > 0 && (
+      <div class="flex flex-wrap gap-1 mb-3">
+        {repo.topics.slice(0, 3).map(topic => (
+          <span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full">
+            {topic}
+          </span>
+        ))}
+        {repo.topics.length > 3 && (
+          <span class="px-2 py-1 text-xs bg-muted text-muted-foreground rounded-full">
+            +{repo.topics.length - 3}
+          </span>
+        )}
+      </div>
+    )}
+  </div>
+
+  <div class="flex items-center justify-between text-xs text-muted-foreground mt-auto">
     <div class="flex items-center gap-4">
       {repo.language && (
         <div class="flex items-center gap-1">
@@ -105,26 +122,13 @@ const getLanguageColor = (language: string | null) => {
       <span>Updated {formatDate(repo.updated_at)}</span>
     </div>
   </div>
-
-  {repo.topics && repo.topics.length > 0 && (
-    <div class="flex flex-wrap gap-1 mt-3">
-      {repo.topics.slice(0, 3).map(topic => (
-        <span class="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full">
-          {topic}
-        </span>
-      ))}
-      {repo.topics.length > 3 && (
-        <span class="px-2 py-1 text-xs bg-muted text-muted-foreground rounded-full">
-          +{repo.topics.length - 3}
-        </span>
-      )}
-    </div>
-  )}
 </a>
 
 <style>
   .github-repo-card {
     text-decoration: none !important;
+    min-height: 280px;
+    height: 280px;
   }
   
   .github-repo-card *,
@@ -150,7 +154,7 @@ const getLanguageColor = (language: string | null) => {
   .github-repo-card:visited span {
     text-decoration: none !important;
   }
-
+  
   .github-repo-card:focus,
   .github-repo-card:focus *,
   .github-repo-card:active,
@@ -161,6 +165,13 @@ const getLanguageColor = (language: string | null) => {
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
