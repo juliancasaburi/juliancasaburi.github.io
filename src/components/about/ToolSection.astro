@@ -11,7 +11,7 @@ interface Props {
     name: string
     description: string
     href: string
-    icon: Promise<typeof import('*.svg?raw')> | ImageMetadata // 支持SVG或图像资源
+    icon: Promise<typeof import('*.svg?raw')> | ImageMetadata | string // Added string for devicon classes
     darkIcon?: Promise<typeof import('*.svg?raw')> | ImageMetadata
   }[]
 }
@@ -21,6 +21,11 @@ const { class: className, title, tools, ...props } = Astro.props
 // 判断是否为ImageMetadata类型
 function isImageMetadata(obj: any): obj is ImageMetadata {
   return obj && typeof obj === 'object' && 'src' in obj
+}
+
+// 判断是否为devicon类名
+function isDeviconClass(obj: any): obj is string {
+  return typeof obj === 'string' && obj.includes('devicon-')
 }
 ---
 
@@ -41,7 +46,11 @@ function isImageMetadata(obj: any): obj is ImageMetadata {
           <div class='flex items-center gap-x-3 rounded-lg border border-transparent px-1.5 py-1 transition-colors hover:border-border hover:bg-muted'>
             {tool.darkIcon ? (
               <>
-                {isImageMetadata(tool.icon) ? (
+                {isDeviconClass(tool.icon) ? (
+                  <div class='size-10 rounded-lg bg-primary-foreground p-2 dark:hidden flex items-center justify-center'>
+                    <i class={`${tool.icon} text-2xl`}></i>
+                  </div>
+                ) : isImageMetadata(tool.icon) ? (
                   <div class='size-10 rounded-lg bg-primary-foreground p-2 dark:hidden'>
                     <Image src={tool.icon} alt={tool.name} class='h-full w-full object-contain' />
                   </div>
@@ -69,7 +78,11 @@ function isImageMetadata(obj: any): obj is ImageMetadata {
               </>
             ) : (
               <>
-                {isImageMetadata(tool.icon) ? (
+                {isDeviconClass(tool.icon) ? (
+                  <div class='size-10 rounded-lg bg-primary-foreground p-2 flex items-center justify-center'>
+                    <i class={`${tool.icon} text-2xl`}></i>
+                  </div>
+                ) : isImageMetadata(tool.icon) ? (
                   <div class='size-10 rounded-lg bg-primary-foreground p-2'>
                     <Image src={tool.icon} alt={tool.name} class='h-full w-full object-contain' />
                   </div>
