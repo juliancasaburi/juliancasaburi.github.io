@@ -9,13 +9,18 @@ import Section from '@/components/home/Section.astro'
 import SkillLayout from '@/components/home/SkillLayout.astro'
 import avatar from '@/assets/avatar.png'
 import config from '@/site-config'
+import { skillArrays } from '@/utils/skillsConfig'
 
-const languagesFrameworks = ['Java (Spring Boot)', 'PHP (Laravel, Symfony)', 'Python']
-const cloudInfrastructure = ['AWS (EC2, ELB, Lambda, Step Functions, API Gateway, ECS, S3, SQS, DynamoDB)', 'Serverless Computing', 'IaC (CloudFormation)']
-const devopsContainerization = ['Docker', 'Kubernetes', 'Git', 'CI/CD (GitHub Actions, Jenkins)']
-const databases = ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis']
-const performanceMonitoring = ['Load Testing (Grafana K6)', 'Prometheus', 'Grafana']
-const projectCollaboration = ['Jira', 'Trello']
+const {
+  languagesFrameworks,
+  cloudInfrastructure,
+  devopsContainerization,
+  databases,
+  testingQualityAssurance,
+  bestPractices,
+  performanceMonitoring,
+  projectCollaboration
+} = skillArrays
 
 const MAX_POSTS = 10
 const allPosts = await getBlogCollection()
@@ -169,6 +174,8 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
         <SkillLayout title='Cloud & Infrastructure' skills={cloudInfrastructure} />
         <SkillLayout title='DevOps & Containerization' skills={devopsContainerization} />
         <SkillLayout title='Databases' skills={databases} />
+        <SkillLayout title='Testing & Quality Assurance' skills={testingQualityAssurance} />
+        <SkillLayout title='Best Practices' skills={bestPractices} />
         <SkillLayout title='Performance & Monitoring' skills={performanceMonitoring} />
         <SkillLayout title='Project & Collaboration Tools' skills={projectCollaboration} />
       </Section>

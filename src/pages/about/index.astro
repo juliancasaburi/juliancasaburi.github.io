@@ -2,9 +2,12 @@
 import PageLayout from '@/layouts/CommonPage.astro'
 import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
+import SkillToolSection from '@/components/about/SkillToolSection.astro'
+import { skillCategories, skillCategoryToTools } from '@/utils/skillsConfig'
 
 const headings = [
   { depth: 2, slug: 'hobbies', text: 'Hobbies' },
+  { depth: 2, slug: 'skills', text: 'Skills' },
   { depth: 2, slug: 'tools', text: 'Tools' },
   { depth: 2, slug: 'social-networks', text: 'Social Networks' },
 ]
@@ -35,6 +38,17 @@ const headings = [
       <strong>Skills Beyond the Game:</strong> Competitive gaming taught me more than mechanics—it sharpened my strategic thinking, teamwork, communication, and adaptability under pressure. These experiences continue to shape how I approach challenges in both tech and life.
     </li>
   </ul>
+
+  {/* skills */}
+  <h2 id='skills'>Skills</h2>
+  <p>Technologies and practices I work with:</p>
+  {skillCategories.map((category) => (
+    <SkillToolSection
+      class='mb-5'
+      title={category.title}
+      tools={skillCategoryToTools(category)}
+    />
+  ))}
 
   {/* tools */}
   <h2 id='tools'>Tools</h2>
@@ -80,16 +94,10 @@ const headings = [
         icon: import('@/assets/tools/warp.svg?raw')
       },
       {
-        name: 'Docker',
-        description: 'Containerization',
-        href: 'https://www.docker.com/',
-        icon: import('@/assets/tools/docker.svg?raw')
-      },
-      {
-        name: 'Kubernetes',
-        description: 'Container Orchestration',
-        href: 'https://kubernetes.io/',
-        icon: import('@/assets/tools/kubernetes.svg?raw')
+        name: 'Postman',
+        description: 'API Development & Testing',
+        href: 'https://www.postman.com/',
+        icon: 'devicon-postman-plain colored'
       }
     ]}
   />
