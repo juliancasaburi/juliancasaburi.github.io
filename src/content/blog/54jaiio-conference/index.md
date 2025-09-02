@@ -7,7 +7,7 @@ tags:
   - conference 
   - research 
   - experience 
-heroImage: { src: './conference-diploma.png', color: '#872b6a' } 
+heroImage: { src: './conference-diploma.jpg', color: '#872b6a' } 
 language: 'English' 
 ---
 
@@ -38,3 +38,4 @@ Since 1961, JAIIO—organized by the **[Argentine Society of Informatics (SADIO)
 
 ## 🙏 Acknowledgments  
 I am grateful to the organizers of JAIIO and ASSE for creating this space, and to the community of researchers and professionals who attended and engaged with my work.
+
