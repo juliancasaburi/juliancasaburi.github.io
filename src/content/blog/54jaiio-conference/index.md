@@ -27,7 +27,7 @@ Presenting it at ASSE was a milestone for me: it allowed me to share my findings
 
 The audience posed thoughtful questions, ranging from practical implementation concerns to potential new directions.
 
-<iframe width="1296" height="729" src="https://www.youtube.com/embed/ss8t2WDd4Ao" title="54JAIIO 2025-08-04" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="478" height="849" src="https://www.youtube.com/embed/ss8t2WDd4Ao" title="54JAIIO 2025-08-04" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ---
 
@@ -38,4 +38,5 @@ Since 1961, JAIIO—organized by the **[Argentine Society of Informatics (SADIO)
 
 ## 🙏 Acknowledgments  
 I am grateful to the organizers of JAIIO and ASSE for creating this space, and to the community of researchers and professionals who attended and engaged with my work.
+
 
