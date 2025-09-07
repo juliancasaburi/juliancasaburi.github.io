@@ -12,7 +12,8 @@ import config from '@/site-config'
 import { skillArrays } from '@/utils/skillsConfig'
 
 const {
-  languagesFrameworks,
+  languages,
+  frameworks,
   cloudInfrastructure,
   devopsContainerization,
   databases,
@@ -169,7 +170,8 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
       </Section>
 
       <Section title='Skills'>
-        <SkillLayout title='Languages & Frameworks' skills={languagesFrameworks} />
+        <SkillLayout title='Languages' skills={languages} />
+        <SkillLayout title='Frameworks' skills={frameworks} />
         <SkillLayout title='Cloud & Infrastructure' skills={cloudInfrastructure} />
         <SkillLayout title='DevOps & Containerization' skills={devopsContainerization} />
         <SkillLayout title='Databases' skills={databases} />

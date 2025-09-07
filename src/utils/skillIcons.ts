@@ -1,9 +1,14 @@
 // Map skill names to devicon classes
 export const skillIconMap: Record<string, string> = {
-  // Languages & Frameworks
-  'Java (Spring Boot)': 'devicon-java-plain colored',
-  'PHP (Laravel, Symfony)': 'devicon-php-plain colored',
+  // Languages
+  'Java': 'devicon-java-plain colored',
+  'PHP': 'devicon-php-plain colored',
   'Python': 'devicon-python-plain colored',
+  
+  // Frameworks
+  'Spring Boot': 'devicon-spring-plain colored',
+  'Laravel': 'devicon-laravel-plain colored',
+  'Symfony': 'devicon-symfony-plain colored',
   
   // Cloud & Infrastructure
   'Lambda': 'devicon-amazonwebservices-plain colored',

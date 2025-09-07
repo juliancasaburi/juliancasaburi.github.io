@@ -13,7 +13,8 @@ export interface SkillCategory {
 
 // Simple skill arrays for home page (pill display)
 export const skillArrays = {
-  languagesFrameworks: ['Java (Spring Boot)', 'PHP (Laravel, Symfony)', 'Python'],
+  languages: ['Java', 'PHP', 'Python'],
+  frameworks: ['Spring Boot', 'Laravel', 'Symfony'],
   cloudInfrastructure: ['Lambda', 'API Gateway', 'EC2 (Elastic Compute Cloud)', 'ECS (Elastic Container Service)', 'S3 (Simple Storage Service)', 'SQS (Simple Queue Service)', 'DynamoDB', 'CloudFormation', 'Serverless Computing'],
   devopsContainerization: ['Docker', 'Kubernetes', 'Git', 'GitHub Actions', 'Jenkins'],
   databases: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis'],
@@ -26,22 +27,42 @@ export const skillArrays = {
 // Detailed skill data for about page (with descriptions and links)
 export const skillCategories: SkillCategory[] = [
   {
-    title: 'Languages & Frameworks',
+    title: 'Languages',
     skills: [
       {
-        name: 'Java (Spring Boot)',
-        description: 'Backend Development Framework',
-        href: 'https://spring.io/projects/spring-boot'
+        name: 'Java',
+        description: 'Object-oriented Programming Language',
+        href: 'https://www.oracle.com/java/'
       },
       {
-        name: 'PHP (Laravel, Symfony)',
-        description: 'Web Development Languages & Frameworks',
+        name: 'PHP',
+        description: 'Server-side Scripting Language',
         href: 'https://www.php.net/'
       },
       {
         name: 'Python',
-        description: 'Programming Language',
+        description: 'High-level Programming Language',
         href: 'https://www.python.org/'
+      }
+    ]
+  },
+  {
+    title: 'Frameworks',
+    skills: [
+      {
+        name: 'Spring Boot',
+        description: 'Java Backend Development Framework',
+        href: 'https://spring.io/projects/spring-boot'
+      },
+      {
+        name: 'Laravel',
+        description: 'PHP Web Application Framework',
+        href: 'https://laravel.com/'
+      },
+      {
+        name: 'Symfony',
+        description: 'PHP Web Development Framework',
+        href: 'https://symfony.com/'
       }
     ]
   },
@@ -233,7 +254,8 @@ export function getSkillArraysFromCategories(): typeof skillArrays {
     
     // Map category titles to their corresponding keys
     const keyMapping: Record<string, keyof typeof skillArrays> = {
-      'languagesframeworks': 'languagesFrameworks',
+      'languages': 'languages',
+      'frameworks': 'frameworks',
       'cloudinfrastructure': 'cloudInfrastructure',
       'devopscontainerization': 'devopsContainerization',
       'databases': 'databases',
