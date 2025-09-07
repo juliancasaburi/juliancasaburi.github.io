@@ -66,12 +66,12 @@ export const theme: ThemeUserConfig = {
         title: 'Buenos Aires, Argentina',
         link: 'https://maps.app.goo.gl/wWEAvcHy8aT4wPcL7',
         style: 'text-sm' // Uno/TW CSS class
-      },
+      }
     ],
     /** Enable displaying a “Astro & Pure theme powered” link in your site’s footer. */
     credits: true,
     /** Optional details about the social media accounts for this site. */
-    social: { github: 'https://github.com/cworld1/astro-theme-pure' }
+    social: { github: 'https://github.com/juliancasaburi/juliancasaburi.github.io' }
   },
 
   content: {
