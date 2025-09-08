@@ -44,28 +44,32 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
           <Label title='Buenos Aires, Argentina'>
             <Icon name='location' class='size-5' slot='icon' />
           </Label>
-          <Label
-            title='GitHub'
-            as='a'
-            href='https://github.com/juliancasaburi'
-            target='_blank'
-          >
-            <Icon name='github' class='size-5' slot='icon' />
-          </Label>
         </div>
       </div>
 
-      {/* Get LinkedIn */}
-      <a
-        href='https://www.linkedin.com/in/julian-casaburi/'
-        target='_blank'
-        class='flex flex-row items-center gap-x-3 rounded-full border bg-background px-4 py-2 text-sm shadow-sm transition-shadow hover:shadow-md'
-      >
-        <span class='relative flex items-center justify-center'>
-          <i class="devicon-linkedin-plain colored text-[1.25rem]"></i>
-        </span>
-        <p class='font-medium text-muted-foreground'>View LinkedIn</p>
-      </a>
+      {/* Social Links */}
+      <div class='flex gap-x-4'>
+        <a
+          href='https://github.com/juliancasaburi'
+          target='_blank'
+          class='flex flex-row items-center gap-x-3 rounded-full border bg-background px-4 py-2 text-sm shadow-sm transition-shadow hover:shadow-md'
+        >
+          <span class='relative flex items-center justify-center'>
+            <Icon name='github' class='size-5' />
+          </span>
+          <p class='font-medium text-muted-foreground'>View GitHub</p>
+        </a>
+        <a
+          href='https://www.linkedin.com/in/julian-casaburi/'
+          target='_blank'
+          class='flex flex-row items-center gap-x-3 rounded-full border bg-background px-4 py-2 text-sm shadow-sm transition-shadow hover:shadow-md'
+        >
+          <span class='relative flex items-center justify-center'>
+            <i class="devicon-linkedin-plain text-[1.25rem]"></i>
+          </span>
+          <p class='font-medium text-muted-foreground'>View LinkedIn</p>
+        </a>
+      </div>
     </section>
 
     <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
