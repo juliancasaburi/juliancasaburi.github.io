@@ -61,12 +61,6 @@ export const theme: ThemeUserConfig = {
     year: `© ${new Date().getFullYear()}`,
     // year: `© 2019 - ${new Date().getFullYear()}`,
     links: [
-      // Registration link
-      {
-        title: 'Buenos Aires, Argentina',
-        link: 'https://maps.app.goo.gl/wWEAvcHy8aT4wPcL7',
-        style: 'text-sm' // Uno/TW CSS class
-      }
     ],
     /** Enable displaying a “Astro & Pure theme powered” link in your site’s footer. */
     credits: false,
