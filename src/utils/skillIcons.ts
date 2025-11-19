@@ -4,12 +4,14 @@ export const skillIconMap: Record<string, string> = {
   'Java': 'devicon-java-plain colored',
   'PHP': 'devicon-php-plain colored',
   'Python': 'devicon-python-plain colored',
+  'C#': 'devicon-csharp-plain colored',
   
   // Frameworks
   'Spring Boot': 'devicon-spring-plain colored',
   'Laravel': 'devicon-laravel-plain colored',
   'Symfony': 'devicon-symfony-plain colored',
-  
+  '.NET Core': 'devicon-dotnetcore-plain colored',
+
   // Cloud & Infrastructure
   'Lambda': 'devicon-amazonwebservices-plain colored',
   'API Gateway': 'devicon-amazonwebservices-plain colored',
