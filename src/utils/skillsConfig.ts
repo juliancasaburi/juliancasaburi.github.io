@@ -13,8 +13,8 @@ export interface SkillCategory {
 
 // Simple skill arrays for home page (pill display)
 export const skillArrays = {
-  languages: ['Java', 'PHP', 'Python'],
-  frameworks: ['Spring Boot', 'Laravel', 'Symfony'],
+  languages: ['Java', 'PHP', 'Python', 'C#'],
+  frameworks: ['Spring Boot', 'Laravel', 'Symfony', '.NET Core'],
   cloudInfrastructure: ['Lambda', 'API Gateway', 'EC2 (Elastic Compute Cloud)', 'ECS (Elastic Container Service)', 'S3 (Simple Storage Service)', 'SQS (Simple Queue Service)', 'DynamoDB', 'CloudFormation', 'Serverless Computing'],
   devopsContainerization: ['Docker', 'Kubernetes', 'Git', 'GitHub Actions', 'Jenkins'],
   databases: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis'],
@@ -43,6 +43,11 @@ export const skillCategories: SkillCategory[] = [
         name: 'Python',
         description: 'High-level Programming Language',
         href: 'https://www.python.org/'
+      },
+      {
+        name: 'C#',
+        description: 'Object-oriented Programming Language',
+        href: 'https://dotnet.microsoft.com/en-us/languages/csharp'
       }
     ]
   },
@@ -63,6 +68,11 @@ export const skillCategories: SkillCategory[] = [
         name: 'Symfony',
         description: 'PHP Web Development Framework',
         href: 'https://symfony.com/'
+      },
+      {
+        name: '.NET Core',
+        description: 'Cross-platform, open-source framework for building modern applications by Microsoft',
+        href: 'https://dotnet.microsoft.com/'
       }
     ]
   },
