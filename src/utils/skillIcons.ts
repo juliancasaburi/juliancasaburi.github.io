@@ -1,5 +1,6 @@
 // Map skill names to devicon classes
 export const skillIconMap: Record<string, string> = {
+    'OpenAPI': 'devicon-openapi-plain colored',
   // Languages
   'Java': 'devicon-java-plain colored',
   'PHP': 'devicon-php-plain colored',
@@ -27,7 +28,7 @@ export const skillIconMap: Record<string, string> = {
   'Docker': 'devicon-docker-plain colored',
   'Kubernetes': 'devicon-kubernetes-plain colored',
   'Git': 'devicon-git-plain colored',
-  'GitHub Actions': 'devicon-github-plain colored',
+  'GitHub Actions': 'devicon-githubactions-plain colored',
   'Jenkins': 'devicon-jenkins-plain colored',
   
   // Databases
@@ -35,6 +36,7 @@ export const skillIconMap: Record<string, string> = {
   'MySQL': 'devicon-mysql-plain colored',
   'MongoDB': 'devicon-mongodb-plain colored',
   'Redis': 'devicon-redis-plain colored',
+  'SQL Server': 'devicon-microsoftsqlserver-plain colored',
   
   // Testing & Quality Assurance
   'JUnit': 'devicon-java-plain colored',

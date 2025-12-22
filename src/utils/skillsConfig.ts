@@ -17,9 +17,9 @@ export const skillArrays = {
   frameworks: ['Spring Boot', 'Laravel', 'Symfony', '.NET Core'],
   cloudInfrastructure: ['Lambda', 'API Gateway', 'EC2 (Elastic Compute Cloud)', 'ECS (Elastic Container Service)', 'S3 (Simple Storage Service)', 'SQS (Simple Queue Service)', 'DynamoDB', 'CloudFormation', 'Serverless Computing'],
   devopsContainerization: ['Docker', 'Kubernetes', 'Git', 'GitHub Actions', 'Jenkins'],
-  databases: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis'],
+  databases: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'SQL Server'],
   testingQualityAssurance: ['JUnit', 'Mockito'],
-  bestPractices: ['Clean Code', 'SOLID Principles', 'Design Patterns'],
+  bestPractices: ['Clean Code', 'SOLID Principles', 'Design Patterns', 'OpenAPI'],
   performanceMonitoring: ['Grafana K6', 'Prometheus', 'Grafana'],
   projectCollaboration: ['Jira', 'Trello']
 };
@@ -153,7 +153,7 @@ export const skillCategories: SkillCategory[] = [
         name: 'Jenkins',
         description: 'Automation Server',
         href: 'https://www.jenkins.io/'
-      }
+      },
     ]
   },
   {
@@ -178,6 +178,11 @@ export const skillCategories: SkillCategory[] = [
         name: 'Redis',
         description: 'In-memory Data Store',
         href: 'https://redis.io/'
+      },
+      {
+        name: 'SQL Server',
+        description: 'Relational Database by Microsoft',
+        href: 'https://www.microsoft.com/en-us/sql-server'
       }
     ]
   },
@@ -213,6 +218,11 @@ export const skillCategories: SkillCategory[] = [
         name: 'Design Patterns',
         description: 'Software Design Solutions',
         href: 'https://refactoring.guru/design-patterns'
+      }
+      ,{
+        name: 'OpenAPI',
+        description: 'Standard for RESTful API documentation and design',
+        href: 'https://www.openapis.org/'
       }
     ]
   },
