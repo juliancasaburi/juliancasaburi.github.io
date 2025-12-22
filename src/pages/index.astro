@@ -7,9 +7,9 @@ import { Button, Card, Icon, Label } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import Section from '@/components/home/Section.astro'
 import SkillLayout from '@/components/home/SkillLayout.astro'
+import { skillArrays } from '@/utils/skillsConfig'
 import avatar from '@/assets/avatar.png'
 import config from '@/site-config'
-import { skillArrays } from '@/utils/skillsConfig'
 
 const {
   languages,
@@ -65,7 +65,7 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
           class='flex flex-row items-center gap-x-3 rounded-full border bg-background px-4 py-2 text-sm shadow-sm transition-shadow hover:shadow-md'
         >
           <span class='relative flex items-center justify-center'>
-            <i class="devicon-linkedin-plain text-[1.25rem]"></i>
+            <i class='devicon-linkedin-plain text-[1.25rem]'></i>
           </span>
           <p class='font-medium text-muted-foreground'>View LinkedIn</p>
         </a>
@@ -75,10 +75,14 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
     <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
       <Section title='About'>
         <p class='text-muted-foreground'>
-          Backend Software Engineer with a focus on building secure, scalable, and cost-effective cloud solutions.
+          Backend Software Engineer with a focus on building secure, scalable, and cost-effective
+          cloud solutions.
         </p>
         <p class='text-muted-foreground'>
-          Graduated with a Licenciatura en Sistemas degree—a program combining elements of both Bachelor's and Master's studies—and previously earned the Analista Programador Universitario degree. Both were completed at the Facultad de Informática, Universidad Nacional de La Plata.
+          Graduated with a Licenciatura en Sistemas degree—a program combining elements of both
+          Bachelor's and Master's studies—and previously earned the Analista Programador
+          Universitario degree. Both were completed at the Facultad de Informática, Universidad
+          Nacional de La Plata.
         </p>
         <Button title='More about me' class='w-fit self-end' href='/about' style='ahead' />
       </Section>
@@ -135,13 +139,11 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
           href='https://servicios.unlp.edu.ar/validar/titulo/1/5316cd924b52f7c70c56fd6569e30097'
         >
           {
-            /* <ul class='ms-4 list-disc text-muted-foreground'>
-          <li>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore debitis recusandae, ut
-            molestiae laboriosam pariatur!
-          </li>
-          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, pariatur!</li>
-        </ul> */
+            (
+              <p class='text-muted-foreground'>
+                Honors: Joaquín V. González Distinction (top academic performance)
+              </p>
+            )
           }
         </Card>
         <Card
@@ -151,15 +153,6 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
           date='February 2016 - September 2021'
           href='https://servicios.unlp.edu.ar/validar/titulo/1/b9b99a92591793224c6f254d10792ec3'
         >
-          {
-            /* <ul class='ms-4 list-disc text-muted-foreground'>
-          <li>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore debitis recusandae, ut
-            molestiae laboriosam pariatur!
-          </li>
-          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, pariatur!</li>
-        </ul> */
-          }
         </Card>
       </Section>
 
