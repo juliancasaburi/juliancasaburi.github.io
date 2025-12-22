@@ -137,10 +137,10 @@ export class RepoCardRenderer {
       : ''
     
     return `
-      <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="github-repo-card group flex flex-col p-4 sm:p-6 rounded-2xl border bg-card hover:bg-card/80 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer h-[320px] w-full overflow-hidden">
+      <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="github-repo-card group flex flex-col p-4 sm:p-6 rounded-2xl border bg-card hover:bg-card/80 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer min-h-[280px] min-w-[280px] w-full">
         <div class="flex items-start justify-between mb-3 gap-3">
           <div class="flex items-center gap-2 flex-1 min-w-0">
-            <h3 class="font-bold text-base sm:text-lg text-foreground group-hover:text-primary transition-colors duration-200 break-words leading-tight">
+            <h3 class="font-bold text-base sm:text-lg text-foreground group-hover:text-primary transition-colors duration-200 break-words leading-tight line-clamp-2">
               ${repo.name}
             </h3>
           </div>
@@ -164,8 +164,8 @@ export class RepoCardRenderer {
           </div>
         </div>
         
-        <div class="flex-1 flex flex-col overflow-hidden">
-          <p class="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-3">
+        <div class="flex-1 flex flex-col min-h-0">
+          <p class="text-muted-foreground text-sm mb-3 leading-relaxed line-clamp-2">
             ${repo.description || 'No description available'}
           </p>
           

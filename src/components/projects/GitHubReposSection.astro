@@ -192,7 +192,6 @@ const { username, reposPerPage = 4 } = Astro.props
   :global(.github-repo-card) {
     text-decoration: none !important;
     min-height: 280px;
-    height: 280px;
   }
 
   :global(.github-repo-card *),
@@ -243,14 +242,15 @@ const { username, reposPerPage = 4 } = Astro.props
   /* Ensure consistent grid layout */
   #github-repos-container {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 1.5rem;
     align-items: stretch;
   }
 
-  @media (min-width: 640px) {
+  /* Force single column on mobile */
+  @media (max-width: 639px) {
     #github-repos-container {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
     }
   }
 </style>
