@@ -1,0 +1,170 @@
+---
+import plantumlEncoder from 'plantuml-encoder';
+
+export interface Props {
+  title?: string;
+  code: string;
+}
+
+const { title = "", code } = Astro.props;
+
+// Encode the PlantUML code and generate the URL
+const encoded = plantumlEncoder.encode(code.trim());
+const svgUrl = `https://www.plantuml.com/plantuml/svg/${encoded}`;
+const pngUrl = `https://www.plantuml.com/plantuml/png/${encoded}`;
+---
+
+<figure class="plantuml-diagram my-8">
+  {title && <figcaption class="diagram-title">{title}</figcaption>}
+
+  <div class="diagram-wrapper">
+    <div class="diagram-content">
+      <img src={svgUrl} alt={title || "PlantUML Diagram"} loading="lazy" />
+    </div>
+    
+    <div class="diagram-toolbar">
+      <a href={pngUrl} download={`${title || 'diagram'}.png`} class="download-png-btn toolbar-btn" title="Download as PNG">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </a>
+      <button class="toggle-source-btn toolbar-btn" title="View source code">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="source-code-container">
+    <pre><code class="language-plantuml">{code.trim()}</code></pre>
+  </div>
+</figure>
+
+<style>
+  .plantuml-diagram {
+    position: relative;
+  }
+
+  .diagram-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-foreground, currentColor);
+    margin-bottom: 0.75rem;
+  }
+
+  .diagram-wrapper {
+    position: relative;
+    background: hsl(var(--muted) / 0.3);
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .diagram-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 0.5rem;
+  }
+
+  .diagram-content img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .diagram-toolbar {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: flex;
+    gap: 0.25rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .diagram-wrapper:hover .diagram-toolbar {
+    opacity: 1;
+  }
+
+  .toolbar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    background: hsl(var(--background) / 0.9);
+    border: 1px solid hsl(var(--border) / 0.5);
+    color: hsl(var(--muted-foreground));
+    cursor: pointer;
+    transition: all 0.15s ease;
+    backdrop-filter: blur(4px);
+    text-decoration: none;
+  }
+
+  .toolbar-btn:hover {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    border-color: hsl(var(--border));
+    transform: translateY(-1px);
+  }
+
+  .toolbar-btn:active {
+    transform: translateY(0);
+  }
+
+  .toolbar-btn.active {
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  .source-code-container {
+    display: none;
+    margin-top: 0.75rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .source-code-container.show {
+    display: block;
+  }
+
+  .source-code-container pre {
+    margin: 0;
+    padding: 1rem;
+    background: hsl(var(--muted) / 0.5);
+    border-radius: 0.5rem;
+    overflow-x: auto;
+  }
+
+  .source-code-container code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.85rem;
+    white-space: pre;
+  }
+</style>
+
+<script>
+  function setupPlantUMLButtons() {
+    const diagrams = document.querySelectorAll("figure.plantuml-diagram");
+    diagrams.forEach((element) => {
+      const toggleSourceBtn = element.querySelector(".toggle-source-btn");
+      const sourceContainer = element.querySelector(".source-code-container");
+
+      if (toggleSourceBtn && sourceContainer) {
+        toggleSourceBtn.addEventListener("click", () => {
+          sourceContainer.classList.toggle("show");
+          toggleSourceBtn.classList.toggle("active");
+        });
+      }
+    });
+  }
+
+  // Wait for DOM to be fully loaded
+  document.addEventListener("DOMContentLoaded", setupPlantUMLButtons);
+
+  // Support Astro View Transitions
+  document.addEventListener("astro:page-load", setupPlantUMLButtons);
+</script>
