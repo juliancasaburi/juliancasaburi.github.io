@@ -1,4 +1,5 @@
 ---
+
 import PageLayout from '@/layouts/CommonPage.astro'
 import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
@@ -107,6 +108,13 @@ const headings = [
         description: 'API Development & Testing',
         href: 'https://www.postman.com/',
         icon: 'devicon-postman-plain colored'
+      },
+      {
+        name: 'OpenCode',
+        description: 'The open source AI coding agent',
+        href: 'https://opencode.ai/',
+        icon: import('@/assets/tools/opencode-light.svg?raw'),
+        darkIcon: import('@/assets/tools/opencode.svg?raw')
       },
     ]}
   />
