@@ -165,14 +165,15 @@ export class RepoCardRenderer {
         </div>
         
         <div class="flex-1 flex flex-col min-h-0">
-          <p class="text-muted-foreground text-sm mb-3 leading-relaxed line-clamp-2">
+          <p class="text-muted-foreground text-sm mb-3 leading-relaxed break-words">
             ${repo.description || 'No description available'}
           </p>
           
           ${topicsHtml ? `<div class="mb-3">${topicsHtml.replace('<div class="flex flex-wrap gap-1 mt-3">', '<div class="flex flex-wrap gap-1">').replace('</div>', '</div>')}</div>` : ''}
         </div>
+
         
-        <div class="flex items-center justify-between text-xs text-muted-foreground mt-auto pt-4">
+        <div class="flex items-center justify-between text-xs text-muted-foreground pt-3">
           <div class="flex items-center gap-3 overflow-hidden">
             ${repo.language ? `
               <div class="flex items-center gap-1 flex-shrink-0">
@@ -182,6 +183,13 @@ export class RepoCardRenderer {
             ` : ''}
             <span class="truncate">Updated ${this.formatDate(repo.updated_at)}</span>
           </div>
+          
+        </div>
+                <div class="mt-auto pt-3 flex items-center text-xs text-muted-foreground/80">
+          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+          View Repo
         </div>
       </a>
     `
